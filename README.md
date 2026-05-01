@@ -8,6 +8,7 @@ Edit flake.nix
 inputs = {
     nixpkgs.follows = "glf-channels/nixpkgs";
     nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    # Add xdaviuspkgs URL
     xdaviuspkgs.url = "github:Xdavius/nixos-pkgs";   
   };
 
@@ -16,6 +17,7 @@ inputs = {
       nixpkgs,
       nixpkgs-unstable,
       self,
+      # Add xdaviuspkgs output
       xdaviuspkgs,
       ...
     }:
@@ -44,6 +46,7 @@ let
 
         specialArgs = {
           pkgs-unstable = pkgsUnstable;
+          # Add xdaviuspkg argument
           inherit xdaviuspkgs;
         };
       };
