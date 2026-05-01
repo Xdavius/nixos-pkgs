@@ -1,6 +1,6 @@
 ## nixos-pkgs xdavius "AUR"
 
-# Use with flake.nix
+### Use with flake.nix
 
 Edit flake.nix
 
@@ -75,7 +75,7 @@ environment.systemPackages = [
 ```
 
 
-# Without Flake, use in configuration.nix
+### Without Flake, use in configuration.nix
 
 ```nix
 {
