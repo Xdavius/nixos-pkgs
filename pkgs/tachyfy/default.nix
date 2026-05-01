@@ -35,20 +35,21 @@ in stdenv.mkDerivation {
   inherit pname version src;
 
   nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
-  buildInputs = [ pcsclite
-  		  libusb1 
-  		  udev 
-                  glib
-                  musl 
-                  gtk3 
-                  dbus-glib
-                  libdbusmenu-gtk2
-                  libdbusmenu
-                  libgbm
-                  libdrm
-                  nss
-                  alsa-lib
-                  ];
+  buildInputs = [
+    pcsclite
+    libusb1 
+  	udev 
+    glib
+    musl 
+    gtk3 
+    dbus-glib
+    libdbusmenu-gtk2
+    libdbusmenu
+    libgbm
+    libdrm
+    nss
+    alsa-lib
+    ];
 
   unpackPhase = "true";
 
