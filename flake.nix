@@ -1,9 +1,10 @@
 {
   outputs = { self, nixpkgs }:
   let
+    system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.x86_64-linux;
   in {
-    packages.x86_64-linux =
-      import ./default.nix { inherit pkgs; };
+    packages.${system} = import ./default.nix { inherit pkgs; };
+    app = import ./default.nix { inherit pkgs; };
   };
 }
