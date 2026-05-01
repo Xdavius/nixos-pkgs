@@ -1,2 +1,2 @@
 # nixos-pkgs
-Nixis PKGS AUR
+Nixos PKGS AUR
