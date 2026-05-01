@@ -73,3 +73,28 @@ environment.systemPackages = [
   xdaviuspkgs.app.tachyfy
   ];
 ```
+
+
+## Without Flake, use in configuration.nix
+
+```nix
+{
+  lib,
+  config,
+  pkgs,
+  #pkgs-unstable,
+  ...
+}:
+
+let
+  xdaviuspkgs = import (builtins.fetchGit {
+    url = "https://github.com/Xdavius/nixos-pkgs";
+    ref = "main";
+  }) { inherit pkgs; };
+in
+{
+  environment.systemPackages = [
+    xdaviuspkgs.tachyfy
+  ];
+}
+```
