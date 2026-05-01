@@ -34,7 +34,11 @@ let
 in stdenv.mkDerivation {
   inherit pname version src;
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
+  nativeBuildInputs = [
+    autoPatchelfHook
+    makeWrapper
+    ];
+
   buildInputs = [
     pcsclite
     libusb1 
