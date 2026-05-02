@@ -77,6 +77,9 @@ environment.systemPackages = [
 
 ### Without Flake, use in configuration.nix
 
+Use with update-xdaviuspkgs-rev.sh in the same folder than configuration.nix or customConfig/default.nix (GLF-OS)
+To generate the revFile.
+
 ```nix
 {
   lib,
@@ -87,9 +90,10 @@ environment.systemPackages = [
 }:
 
 let
+  revFile = import ./xdaviuspkgs-rev.nix;
   xdaviuspkgs = import (builtins.fetchGit {
     url = "https://github.com/Xdavius/nixos-pkgs";
-    ref = "main";
+    rev = revFile.rev;
   }) { inherit pkgs; };
 in
 {
