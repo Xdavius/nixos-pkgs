@@ -43,7 +43,7 @@ let
 
     src = python3Packages.fetchPypi {
       inherit pname version;
-      hash = "sha256-9hsDgvN6M0vIuoYEvIS5SHXuT1lPu6+CssOz6CeIP8E=";
+      hash = "sha256-H22bDClBmjRjg8QdaFev9ZuHkX9d9ABZB9c1QhlcPOY=";
     };
 
     build-system = [ python3Packages.setuptools ];
