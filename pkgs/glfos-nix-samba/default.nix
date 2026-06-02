@@ -7,6 +7,7 @@
   glib,
   desktop-file-utils,
   gettext,
+  gobject-introspection,
   python3Packages,
   adwaita-icon-theme,
   libadwaita,
@@ -23,12 +24,23 @@ python3Packages.buildPythonApplication rec {
     sha256 = "sha256-WtNVTtfY9agbD/4EnTEPwSb/7yWlT2d3KR0yyhTg5wU=";
   };
 
+  postPatch = ''
+    substituteInPlace src/infrastructure/ui/app_window.py \
+      --replace-fail \
+        '    def do_activate(self):
+        win = MainWindow(application=self)' \
+        '    def do_activate(self):
+        Gtk.Settings.get_default().set_property("gtk-icon-theme-name", "Adwaita")
+        win = MainWindow(application=self)'
+  '';
+
   format = "other";
 
   nativeBuildInputs = [
     desktop-file-utils
     gettext
     glib
+    gobject-introspection
     meson
     ninja
     wrapGAppsHook4
@@ -44,17 +56,14 @@ python3Packages.buildPythonApplication rec {
     pygobject3
   ];
 
-  # Let buildPythonApplication create a single wrapper containing both the
-  # Python path and the GTK environment collected by wrapGAppsHook4.
-  dontWrapGApps = true;
-
-  # gappsWrapperArgs is populated by a preFixup hook, so consume it from
-  # postFixup. Keep Adwaita explicit: the application uses its symbolic icons.
-  postFixup = ''
-    appendToVar makeWrapperArgs \
-      "''${gappsWrapperArgs[@]}" \
-      --prefix XDG_DATA_DIRS : "${adwaita-icon-theme}/share"
-  '';
+  # The application uses symbolic icons from Adwaita. This is applied by the
+  # Python wrapper before wrapGAppsHook4 adds the remaining GTK environment.
+  makeWrapperArgs = [
+    "--prefix"
+    "XDG_DATA_DIRS"
+    ":"
+    "${adwaita-icon-theme}/share"
+  ];
 
   meta = with lib; {
     description = "GTK application to configure Samba shares on GLF-OS";
