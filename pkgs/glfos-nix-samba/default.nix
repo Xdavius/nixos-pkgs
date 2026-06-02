@@ -24,15 +24,9 @@ python3Packages.buildPythonApplication rec {
     sha256 = "sha256-WtNVTtfY9agbD/4EnTEPwSb/7yWlT2d3KR0yyhTg5wU=";
   };
 
-  postPatch = ''
-    substituteInPlace src/infrastructure/ui/app_window.py \
-      --replace-fail \
-        '    def do_activate(self):
-        win = MainWindow(application=self)' \
-        '    def do_activate(self):
-        Gtk.Settings.get_default().set_property("gtk-icon-theme-name", "Adwaita")
-        win = MainWindow(application=self)'
-  '';
+  patches = [
+    ./force-adwaita-icon-theme.patch
+  ];
 
   format = "other";
 

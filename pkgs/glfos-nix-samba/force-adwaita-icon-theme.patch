@@ -1,0 +1,8 @@
+diff --git a/src/infrastructure/ui/app_window.py b/src/infrastructure/ui/app_window.py
+index 2a2b6a2..67efc3f 100644
+--- a/src/infrastructure/ui/app_window.py
++++ b/src/infrastructure/ui/app_window.py
+@@ -369,2 +369,3 @@ class AppWindow(Adw.Application):
+     def do_activate(self):
++        Gtk.Settings.get_default().set_property("gtk-icon-theme-name", "Adwaita")
+         win = MainWindow(application=self)
