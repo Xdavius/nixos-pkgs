@@ -48,8 +48,12 @@ python3Packages.buildPythonApplication rec {
   # Python path and the GTK environment collected by wrapGAppsHook4.
   dontWrapGApps = true;
 
-  preFixup = ''
-    makeWrapperArgs+=("''${gappsWrapperArgs[@]}")
+  # gappsWrapperArgs is populated by a preFixup hook, so consume it from
+  # postFixup. Keep Adwaita explicit: the application uses its symbolic icons.
+  postFixup = ''
+    appendToVar makeWrapperArgs \
+      "''${gappsWrapperArgs[@]}" \
+      --prefix XDG_DATA_DIRS : "${adwaita-icon-theme}/share"
   '';
 
   meta = with lib; {
