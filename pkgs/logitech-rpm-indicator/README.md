@@ -15,28 +15,31 @@ LED bar of Logitech steering wheels via hidraw.
 nix-build ./.
 ```
 
-The first build will fail with two `lib.fakeHash` mismatches (one for
-the GitHub source, one for the `hid` PyPI package). Replace each hash
-with the value Nix prints in the error and rebuild.
+The derivation currently pins upstream release `v1.3.1`.
 
 ## Layout (post-install)
 
 ```
 $out/
 ├── bin/logitech-rpm-indicator           ← wrapper that wraps Python + GTK4
-├── share/logitech-rpm-indicator/
+├── lib/logitech-rpm-indicator/
 │   ├── main.py
 │   ├── games/
 │   ├── wheels/
-│   └── icons/
+│   ├── icons/
+│   └── scs-plugin/
+│       ├── logitech_rpm_telemetry.so    ← native Linux plugin
+│       └── logitech_rpm_telemetry.dll   ← Windows/Proton plugin
 ├── share/applications/
-│   └── logitech-rpm-indicator.desktop
-├── share/icons/hicolor/256x256/apps/
-│   └── logitech-rpm-indicator.png
+│   └── io.github.IvanVojtko.LogitechRpmIndicator.desktop
+├── share/icons/hicolor/
+│   ├── 256x256/apps/
+│   │   └── logitech-rpm-indicator.png
+│   └── scalable/apps/
+│       └── logitech-rpm-indicator.svg
 └── share/doc/logitech-rpm-indicator/
     ├── README.md
-    ├── LICENSE
-    └── scs-plugin/                      ← ETS2 SCS plugin source (not built)
+    └── LICENSE
 ```
 
 ## Permissions
@@ -49,16 +52,11 @@ an udev rule on your own.
 
 ## ETS2 SCS plugin
 
-The upstream `scs-plugin/` (Euro Truck Simulator 2 telemetry plugin,
-compiled Windows DLL) is shipped as documentation/source under
-`$out/share/doc/logitech-rpm-indicator/scs-plugin/`. Building it
-requires `mingw-w64`. If you actually use ETS2 over Proton, you can
-build it manually:
-
-```bash
-make -C $out/share/doc/logitech-rpm-indicator/scs-plugin/ \
-  SCS_SDK_DIR=/path/to/scs_sdk_1_14
-```
+The package builds both upstream ETS2 telemetry plugin variants:
+`logitech_rpm_telemetry.so` for native Linux and
+`logitech_rpm_telemetry.dll` for Windows/Proton. In the GUI, select
+Euro Truck Simulator 2 and use the plugin installation button to copy
+the bundled files into the detected Steam installation.
 
 ## License
 

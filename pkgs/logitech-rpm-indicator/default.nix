@@ -1,6 +1,7 @@
 {
   lib,
   fetchFromGitHub,
+  fetchurl,
   python3Packages,
   python3,
   hidapi,
@@ -10,6 +11,8 @@
   gobject-introspection,
   wrapGAppsHook4,
   makeWrapper,
+  pkgsCross,
+  unzip,
 }:
 
 # Packaging of IvanVojtko/logitech-linux-rpm-led
@@ -21,19 +24,26 @@
 # Upstream: https://github.com/IvanVojtko/logitech-linux-rpm-led
 #
 # Notes Nix:
-#  - Upstream has no pyproject.toml / setup.py; we install manually:
-#    main.py + games/ + wheels/ + icons/ -> $out/share/<pname>/
-#    wrapper -> $out/bin/<pname>
+#  - Upstream has no pyproject.toml / setup.py. Its Makefile installs
+#    the application under $out/lib/<pname>/ and creates a launcher
+#    under $out/bin/<pname>.
 #  - The `hid` PyPI package (Apmadsen ctypes binding) is not in nixpkgs.
 #    We package it inline below and patch it to find libhidapi-hidraw.so
 #    in the Nix store at build time.
 #  - The wrapper runs under wrapGAppsHook4 so GTK4 + libadwaita +
 #    GI_TYPELIB_PATH are correctly set for the GUI.
+#  - The bundled ETS2 SCS telemetry plugin is built for native Linux and
+#    Windows/Proton. Its SDK headers are fetched from the official SCS URL.
 #  - Logitech wheel hidraw devices are accessible by users in the
 #    `input` group on GLF-OS (default for `nobodyz`). No extra udev
 #    rule needed for the MVP.
 
 let
+  scsSdk = fetchurl {
+    url = "https://download.eurotrucksimulator2.com/scs_sdk_1_14.zip";
+    hash = "sha256-xsH3N2tzJJlNn5xWfzxBQfu/MFtr+AO8TP7vJDeyAjo=";
+  };
+
   # Apmadsen's ctypes binding for hidapi (PyPI package "hid").
   # Different from nixpkgs' python3Packages.hidapi (Cython binding).
   hid = python3Packages.buildPythonPackage rec {
@@ -84,6 +94,8 @@ python3Packages.buildPythonApplication rec {
   nativeBuildInputs = [
     gobject-introspection
     makeWrapper
+    pkgsCross.mingwW64.stdenv.cc
+    unzip
     wrapGAppsHook4
   ];
 
@@ -106,6 +118,12 @@ python3Packages.buildPythonApplication rec {
 
   # Avoid wrapGAppsHook4 double-wrapping the Python wrapper script.
   dontWrapGApps = true;
+
+  postBuild = ''
+    unzip -q ${scsSdk} -d scs_sdk_1_14
+    make -C scs-plugin \
+      SCS_SDK_DIR="$PWD/scs_sdk_1_14"
+  '';
 
   # The wrapper MUST be created in postFixup, NOT installPhase: that's
   # where wrapGAppsHook4 (`gappsWrapperArgsHook`) has finished populating
