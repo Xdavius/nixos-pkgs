@@ -1,0 +1,140 @@
+# French translations for nix-firewall-mngt
+# Copyright (C) 2026 Gaming Linux FR
+# This file is distributed under the same license as the nix-firewall-mngt package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nix-firewall-mngt 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-01 00:00+0000\n"
+"PO-Revision-Date: 2026-02-01 00:00+0000\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Rebuilding NixOS configuration..."
+msgstr "Reconstruction de la configuration NixOS..."
+
+msgid "Failed to rebuild NixOS configuration"
+msgstr "Echec de la reconstruction de la configuration NixOS"
+
+msgid "Firewall"
+msgstr "Pare-feu"
+
+msgid "Enable NixOS firewall protection"
+msgstr "Activer la protection pare-feu NixOS"
+
+msgid "Active rules"
+msgstr "Regles actives"
+
+msgid "No firewall rule configured"
+msgstr "Aucune regle de pare-feu configuree"
+
+msgid "Add rules with the button below or use presets"
+msgstr "Ajoutez des regles avec le bouton ci-dessous ou utilisez les presets"
+
+msgid "Remove rule"
+msgstr "Supprimer la regle"
+
+msgid "Do you really want to remove this firewall rule?"
+msgstr "Voulez-vous vraiment supprimer cette regle de pare-feu ?"
+
+msgid "Cancel"
+msgstr "Annuler"
+
+msgid "Remove"
+msgstr "Supprimer"
+
+msgid "Trusted interfaces"
+msgstr "Interfaces de confiance"
+
+msgid "No trusted interface configured"
+msgstr "Aucune interface de confiance configuree"
+
+msgid "Remove this interface"
+msgstr "Supprimer cette interface"
+
+msgid "Add trusted interface"
+msgstr "Ajouter une interface de confiance"
+
+msgid "Add a rule"
+msgstr "Ajouter une regle"
+
+msgid "Presets"
+msgstr "Presets"
+
+msgid "Save and Rebuild"
+msgstr "Sauvegarder et Reconstruire"
+
+msgid "Firewall configuration applied successfully"
+msgstr "Configuration du pare-feu appliquee avec succes"
+
+msgid "Add a firewall rule"
+msgstr "Ajouter une regle de pare-feu"
+
+msgid "Rule name"
+msgstr "Nom de la regle"
+
+msgid "Protocol"
+msgstr "Protocole"
+
+msgid "Port type"
+msgstr "Type de port"
+
+msgid "Single port"
+msgstr "Port unique"
+
+msgid "Port range"
+msgstr "Plage de ports"
+
+msgid "From"
+msgstr "De"
+
+msgid "To"
+msgstr "A"
+
+msgid "Please enter a rule name"
+msgstr "Veuillez entrer un nom de regle"
+
+msgid "Please enter at least one port number"
+msgstr "Veuillez entrer au moins un numero de port"
+
+msgid "Invalid port number (1-65535)"
+msgstr "Numero de port invalide (1-65535)"
+
+msgid "Invalid port range (from must be less than to)"
+msgstr "Plage de ports invalide (debut doit etre inferieur a fin)"
+
+msgid "Add"
+msgstr "Ajouter"
+
+msgid "Edit firewall rule"
+msgstr "Modifier une regle de pare-feu"
+
+msgid "Save"
+msgstr "Enregistrer"
+
+msgid "Edit this rule"
+msgstr "Modifier cette regle"
+
+msgid "Remove this rule"
+msgstr "Supprimer cette regle"
+
+msgid "Appearance"
+msgstr "Apparence"
+
+msgid "System"
+msgstr "Systeme"
+
+msgid "Light"
+msgstr "Clair"
+
+msgid "Dark"
+msgstr "Sombre"
+
+msgid "Predefined rules"
+msgstr "Regles predefinies"
+
+msgid "Add selection"
+msgstr "Ajouter la selection"

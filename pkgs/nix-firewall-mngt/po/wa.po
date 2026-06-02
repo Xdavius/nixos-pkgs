@@ -1,0 +1,140 @@
+# Walloon translations for nix-firewall-mngt
+# Copyright (C) 2026 Gaming Linux FR
+# This file is distributed under the same license as the nix-firewall-mngt package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nix-firewall-mngt 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-01 00:00+0000\n"
+"PO-Revision-Date: 2026-02-02 00:00+0000\n"
+"Language: wa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Rebuilding NixOS configuration..."
+msgstr "Rifaitmint del configuråcion NixOS..."
+
+msgid "Failed to rebuild NixOS configuration"
+msgstr "Fåte pol rifaitmint del configuråcion NixOS"
+
+msgid "Firewall"
+msgstr "Morea d' feu"
+
+msgid "Enable NixOS firewall protection"
+msgstr "Mete e route li protedjaedje do morea d' feu NixOS"
+
+msgid "Active rules"
+msgstr "Regues ativêyes"
+
+msgid "No firewall rule configured"
+msgstr "Nole reguê do morea d' feu configuré"
+
+msgid "Add rules with the button below or use presets"
+msgstr "Radjoutez des regues avou l' boton chal pa dzo ou eployîz les modelêyes"
+
+msgid "Remove rule"
+msgstr "Oter li reguê"
+
+msgid "Do you really want to remove this firewall rule?"
+msgstr "Voloz-v' vormint oter cisse reguê do morea d' feu la ?"
+
+msgid "Cancel"
+msgstr "Rinoncî"
+
+msgid "Remove"
+msgstr "Oter"
+
+msgid "Trusted interfaces"
+msgstr "Interfaces di confyince"
+
+msgid "No trusted interface configured"
+msgstr "Nole interface di confyince configurêye"
+
+msgid "Remove this interface"
+msgstr "Oter ciste interface ci"
+
+msgid "Add trusted interface"
+msgstr "Radjouter ene interface di confyince"
+
+msgid "Add a rule"
+msgstr "Radjouter ene reguê"
+
+msgid "Presets"
+msgstr "Modelêyes"
+
+msgid "Save and Rebuild"
+msgstr "Schaper et Rifé"
+
+msgid "Firewall configuration applied successfully"
+msgstr "Configuråcion do morea d' feu aplicêye avou soçès"
+
+msgid "Add a firewall rule"
+msgstr "Radjouter ene reguê do morea d' feu"
+
+msgid "Rule name"
+msgstr "No del reguê"
+
+msgid "Protocol"
+msgstr "Protocole"
+
+msgid "Port type"
+msgstr "Sôre di poirt"
+
+msgid "Single port"
+msgstr "On seû poirt"
+
+msgid "Port range"
+msgstr "Plaece di poirts"
+
+msgid "From"
+msgstr "Di"
+
+msgid "To"
+msgstr "A"
+
+msgid "Please enter a rule name"
+msgstr "Dinez on no pol reguê s' i vs plait"
+
+msgid "Please enter at least one port number"
+msgstr "Dinez å mons on limero d' poirt s' i vs plait"
+
+msgid "Invalid port number (1-65535)"
+msgstr "Limero d' poirt nén valide (1-65535)"
+
+msgid "Invalid port range (from must be less than to)"
+msgstr "Plaece di poirts nén valide (li cmincemint doet esse pus ptit kel fin)"
+
+msgid "Add"
+msgstr "Radjouter"
+
+msgid "Edit firewall rule"
+msgstr "Candjî li reguê do morea d' feu"
+
+msgid "Save"
+msgstr "Schaper"
+
+msgid "Edit this rule"
+msgstr "Candjî cisse reguê ci"
+
+msgid "Remove this rule"
+msgstr "Oter cisse reguê ci"
+
+msgid "Appearance"
+msgstr "Aparince"
+
+msgid "System"
+msgstr "Sistinme"
+
+msgid "Light"
+msgstr "Clér"
+
+msgid "Dark"
+msgstr "Neur"
+
+msgid "Predefined rules"
+msgstr "Regues prédefinêyes"
+
+msgid "Add selection"
+msgstr "Radjouter li selecsion"

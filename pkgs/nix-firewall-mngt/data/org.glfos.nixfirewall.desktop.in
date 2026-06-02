@@ -1,0 +1,25 @@
+[Desktop Entry]
+Name=Nix Firewall Manager
+Comment=Manage firewall rules on NixOS / GLF-OS
+Comment[fr]=Gerez les regles de pare-feu sous NixOS / GLF-OS
+Comment[br]=Mereit reolennou moger-dan war NixOS / GLF-OS
+Comment[de]=Firewall-Regeln unter NixOS / GLF-OS verwalten
+Comment[es]=Gestione las reglas de cortafuegos en NixOS / GLF-OS
+Comment[it]=Gestisci le regole del firewall su NixOS / GLF-OS
+Comment[nl]=Beheer firewallregels op NixOS / GLF-OS
+Comment[pt]=Gerencie as regras de firewall no NixOS / GLF-OS
+Comment[wa]=Manaedjî les regues do morea d' feu so NixOS / GLF-OS
+Exec=nix-firewall-mngt
+Icon=org.glfos.nixfirewall
+Terminal=false
+Type=Application
+Categories=System;Settings;Security;
+Keywords=firewall;security;network;nix;nixos;pare-feu;
+Keywords[de]=firewall;sicherheit;netzwerk;nix;nixos;
+Keywords[es]=cortafuegos;seguridad;red;nix;nixos;
+Keywords[it]=firewall;sicurezza;rete;nix;nixos;
+Keywords[pt]=firewall;seguranca;rede;nix;nixos;
+Keywords[br]=moger-dan;surentez;rouedad;nix;nixos;
+Keywords[nl]=firewall;beveiliging;netwerk;nix;nixos;
+Keywords[wa]=morea;feu;surete;rantoele;nix;nixos;
+StartupNotify=true

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE policyconfig PUBLIC
+  "-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+  "http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<policyconfig>
+  <action id="org.glfos.nixfirewall">
+    <description>Run Nix Firewall Manager</description>
+    <description xml:lang="fr">Executer Nix Firewall Manager</description>
+    <description xml:lang="br">Lañsañ Nix Firewall Manager</description>
+    <description xml:lang="de">Nix Firewall Manager ausfuehren</description>
+    <description xml:lang="es">Ejecutar Nix Firewall Manager</description>
+    <description xml:lang="it">Eseguire Nix Firewall Manager</description>
+    <description xml:lang="nl">Nix Firewall Manager uitvoeren</description>
+    <description xml:lang="pt">Executar Nix Firewall Manager</description>
+    <description xml:lang="wa">Demarrer Nix Firewall Manager</description>
+    <message>Authentication is required to manage firewall rules</message>
+    <message xml:lang="fr">L'authentification est requise pour gerer les regles de pare-feu</message>
+    <message xml:lang="br">Ret eo an dilesa evit merañ reolennou ar moger-dan</message>
+    <message xml:lang="de">Authentifizierung ist erforderlich um Firewall-Regeln zu verwalten</message>
+    <message xml:lang="es">Se requiere autenticacion para gestionar las reglas de cortafuegos</message>
+    <message xml:lang="it">L'autenticazione e necessaria per gestire le regole del firewall</message>
+    <message xml:lang="nl">Authenticatie is vereist om firewallregels te beheren</message>
+    <message xml:lang="pt">Autenticacao e necessaria para gerenciar as regras de firewall</message>
+    <message xml:lang="wa">L' otentificåcion est rcwisse po manaedjî les regues do morea d' feu</message>
+    <defaults>
+      <allow_any>auth_admin</allow_any>
+      <allow_inactive>auth_admin</allow_inactive>
+      <allow_active>auth_admin_keep</allow_active>
+    </defaults>
+    <annotate key="org.freedesktop.policykit.exec.path">@bindir@/nix-firewall-mngt</annotate>
+    <annotate key="org.freedesktop.policykit.exec.allow_gui">true</annotate>
+  </action>
+</policyconfig>

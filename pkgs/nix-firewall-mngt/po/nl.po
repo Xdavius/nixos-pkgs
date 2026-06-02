@@ -1,0 +1,140 @@
+# Dutch/Flemish translations for nix-firewall-mngt
+# Copyright (C) 2026 Gaming Linux FR
+# This file is distributed under the same license as the nix-firewall-mngt package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nix-firewall-mngt 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-01 00:00+0000\n"
+"PO-Revision-Date: 2026-02-02 00:00+0000\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Rebuilding NixOS configuration..."
+msgstr "NixOS-configuratie wordt opnieuw opgebouwd..."
+
+msgid "Failed to rebuild NixOS configuration"
+msgstr "Fout bij het opnieuw opbouwen van de NixOS-configuratie"
+
+msgid "Firewall"
+msgstr "Firewall"
+
+msgid "Enable NixOS firewall protection"
+msgstr "NixOS-firewallbescherming inschakelen"
+
+msgid "Active rules"
+msgstr "Actieve regels"
+
+msgid "No firewall rule configured"
+msgstr "Geen firewallregel geconfigureerd"
+
+msgid "Add rules with the button below or use presets"
+msgstr "Voeg regels toe met de knop hieronder of gebruik sjablonen"
+
+msgid "Remove rule"
+msgstr "Regel verwijderen"
+
+msgid "Do you really want to remove this firewall rule?"
+msgstr "Wilt u deze firewallregel echt verwijderen?"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Trusted interfaces"
+msgstr "Vertrouwde interfaces"
+
+msgid "No trusted interface configured"
+msgstr "Geen vertrouwde interface geconfigureerd"
+
+msgid "Remove this interface"
+msgstr "Deze interface verwijderen"
+
+msgid "Add trusted interface"
+msgstr "Vertrouwde interface toevoegen"
+
+msgid "Add a rule"
+msgstr "Regel toevoegen"
+
+msgid "Presets"
+msgstr "Sjablonen"
+
+msgid "Save and Rebuild"
+msgstr "Opslaan en Opnieuw opbouwen"
+
+msgid "Firewall configuration applied successfully"
+msgstr "Firewallconfiguratie succesvol toegepast"
+
+msgid "Add a firewall rule"
+msgstr "Firewallregel toevoegen"
+
+msgid "Rule name"
+msgstr "Regelnaam"
+
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Port type"
+msgstr "Poorttype"
+
+msgid "Single port"
+msgstr "Enkele poort"
+
+msgid "Port range"
+msgstr "Poortbereik"
+
+msgid "From"
+msgstr "Van"
+
+msgid "To"
+msgstr "Tot"
+
+msgid "Please enter a rule name"
+msgstr "Voer een regelnaam in"
+
+msgid "Please enter at least one port number"
+msgstr "Voer ten minste een poortnummer in"
+
+msgid "Invalid port number (1-65535)"
+msgstr "Ongeldig poortnummer (1-65535)"
+
+msgid "Invalid port range (from must be less than to)"
+msgstr "Ongeldig poortbereik (begin moet kleiner zijn dan einde)"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid "Edit firewall rule"
+msgstr "Firewallregel bewerken"
+
+msgid "Save"
+msgstr "Opslaan"
+
+msgid "Edit this rule"
+msgstr "Deze regel bewerken"
+
+msgid "Remove this rule"
+msgstr "Deze regel verwijderen"
+
+msgid "Appearance"
+msgstr "Uiterlijk"
+
+msgid "System"
+msgstr "Systeem"
+
+msgid "Light"
+msgstr "Licht"
+
+msgid "Dark"
+msgstr "Donker"
+
+msgid "Predefined rules"
+msgstr "Voorgedefinieerde regels"
+
+msgid "Add selection"
+msgstr "Selectie toevoegen"

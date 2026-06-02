@@ -1,0 +1,24 @@
+[package]
+name = "nix-firewall-mngt"
+version = "1.0.5"
+edition = "2021"
+authors = ["Gaming Linux FR"]
+license = "GPL-3.0-or-later"
+description = "Nix Firewall Manager - A simple GUI to manage firewall rules on NixOS / GLF-OS"
+
+[dependencies]
+gtk4 = { version = "0.9", features = ["v4_10"] }
+libadwaita = { version = "0.7", features = ["v1_4"] }
+glib = "0.20"
+gio = "0.20"
+gettext-rs = { version = "0.7", features = ["gettext-system"] }
+regex = "1.10"
+anyhow = "1.0"
+thiserror = "1.0"
+once_cell = "1.19"
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true

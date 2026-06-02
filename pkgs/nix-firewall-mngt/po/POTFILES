@@ -1,0 +1,4 @@
+src/ui/window.rs
+src/ui/widgets/rules_list.rs
+src/ui/dialogs/add_rule.rs
+src/ui/dialogs/presets.rs

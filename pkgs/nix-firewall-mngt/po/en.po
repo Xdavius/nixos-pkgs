@@ -1,0 +1,140 @@
+# English translations for nix-firewall-mngt
+# Copyright (C) 2026 Gaming Linux FR
+# This file is distributed under the same license as the nix-firewall-mngt package.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nix-firewall-mngt 1.0.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-01 00:00+0000\n"
+"PO-Revision-Date: 2026-02-01 00:00+0000\n"
+"Language: en\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Rebuilding NixOS configuration..."
+msgstr "Rebuilding NixOS configuration..."
+
+msgid "Failed to rebuild NixOS configuration"
+msgstr "Failed to rebuild NixOS configuration"
+
+msgid "Firewall"
+msgstr "Firewall"
+
+msgid "Enable NixOS firewall protection"
+msgstr "Enable NixOS firewall protection"
+
+msgid "Active rules"
+msgstr "Active rules"
+
+msgid "No firewall rule configured"
+msgstr "No firewall rule configured"
+
+msgid "Add rules with the button below or use presets"
+msgstr "Add rules with the button below or use presets"
+
+msgid "Remove rule"
+msgstr "Remove rule"
+
+msgid "Do you really want to remove this firewall rule?"
+msgstr "Do you really want to remove this firewall rule?"
+
+msgid "Cancel"
+msgstr "Cancel"
+
+msgid "Remove"
+msgstr "Remove"
+
+msgid "Trusted interfaces"
+msgstr "Trusted interfaces"
+
+msgid "No trusted interface configured"
+msgstr "No trusted interface configured"
+
+msgid "Remove this interface"
+msgstr "Remove this interface"
+
+msgid "Add trusted interface"
+msgstr "Add trusted interface"
+
+msgid "Add a rule"
+msgstr "Add a rule"
+
+msgid "Presets"
+msgstr "Presets"
+
+msgid "Save and Rebuild"
+msgstr "Save and Rebuild"
+
+msgid "Firewall configuration applied successfully"
+msgstr "Firewall configuration applied successfully"
+
+msgid "Add a firewall rule"
+msgstr "Add a firewall rule"
+
+msgid "Rule name"
+msgstr "Rule name"
+
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Port type"
+msgstr "Port type"
+
+msgid "Single port"
+msgstr "Single port"
+
+msgid "Port range"
+msgstr "Port range"
+
+msgid "From"
+msgstr "From"
+
+msgid "To"
+msgstr "To"
+
+msgid "Please enter a rule name"
+msgstr "Please enter a rule name"
+
+msgid "Please enter at least one port number"
+msgstr "Please enter at least one port number"
+
+msgid "Invalid port number (1-65535)"
+msgstr "Invalid port number (1-65535)"
+
+msgid "Invalid port range (from must be less than to)"
+msgstr "Invalid port range (from must be less than to)"
+
+msgid "Add"
+msgstr "Add"
+
+msgid "Edit firewall rule"
+msgstr "Edit firewall rule"
+
+msgid "Save"
+msgstr "Save"
+
+msgid "Edit this rule"
+msgstr "Edit this rule"
+
+msgid "Remove this rule"
+msgstr "Remove this rule"
+
+msgid "Appearance"
+msgstr "Appearance"
+
+msgid "System"
+msgstr "System"
+
+msgid "Light"
+msgstr "Light"
+
+msgid "Dark"
+msgstr "Dark"
+
+msgid "Predefined rules"
+msgstr "Predefined rules"
+
+msgid "Add selection"
+msgstr "Add selection"
