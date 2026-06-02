@@ -64,6 +64,10 @@ impl NixFirewallApp {
     }
 
     fn on_activate(app: &adw::Application) {
+        if let Some(settings) = gtk4::Settings::default() {
+            settings.set_property("gtk-icon-theme-name", "Adwaita");
+        }
+
         // Apply saved theme preference (works on GNOME via libadwaita,
         // and on KDE Plasma via XDG Desktop Portal color-scheme)
         let style_manager = adw::StyleManager::default();
