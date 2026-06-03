@@ -7,11 +7,7 @@
   ninja,
   pkg-config,
   glib,
-  desktop-file-utils,
   gettext,
-  librsvg,
-  blueprint-compiler,
-  appstream-glib,
   adwaita-icon-theme,
   libadwaita,
   gtk4,
@@ -32,9 +28,6 @@ stdenv.mkDerivation rec {
   };
 
   nativeBuildInputs = [
-    appstream-glib
-    blueprint-compiler
-    desktop-file-utils
     gettext
     glib
     gobject-introspection
@@ -52,7 +45,6 @@ stdenv.mkDerivation rec {
     gtk4
     libadwaita
     glib
-    librsvg
     polkit
   ];
 
