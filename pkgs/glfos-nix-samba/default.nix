@@ -16,17 +16,13 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "glfos-nix-samba";
-  version = "1.0.10";
+  version = "1.0.11";
 
   src = fetchgit {
     url = "https://github.com/imikado/glfos-nix-samba";
     rev = version;
-    sha256 = "sha256-WtNVTtfY9agbD/4EnTEPwSb/7yWlT2d3KR0yyhTg5wU=";
+    sha256 = "sha256-w8kst5cpMddcqUz/F7lHUW60Mh44uYfNPyBv0ocoiLU=";
   };
-
-  patches = [
-    ./force-adwaita-icon-theme.patch
-  ];
 
   format = "other";
 
@@ -52,12 +48,12 @@ python3Packages.buildPythonApplication rec {
 
   # The application uses symbolic icons from Adwaita. This is applied by the
   # Python wrapper before wrapGAppsHook4 adds the remaining GTK environment.
-  makeWrapperArgs = [
-    "--prefix"
-    "XDG_DATA_DIRS"
-    ":"
-    "${adwaita-icon-theme}/share"
-  ];
+  #makeWrapperArgs = [
+  #  "--prefix"
+  #  "XDG_DATA_DIRS"
+  #  ":"
+  #  "${adwaita-icon-theme}/share"
+  #];
 
   meta = with lib; {
     description = "GTK application to configure Samba shares on GLF-OS";
