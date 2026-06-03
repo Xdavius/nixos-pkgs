@@ -1,0 +1,142 @@
+# GLF-OS bump bot for proton-cachyos-bin
+#
+# Two jobs:
+#   - check-upstream : runs on schedule/manual. Polls
+#     https://github.com/CachyOS/proton-cachyos/releases/latest,
+#     compares with the local default.nix version, and if different
+#     bumps + opens an MR.
+#   - auto-tag       : runs on push to main when default.nix changes.
+#     Reads `version` from default.nix and creates a git tag with
+#     that exact value (so the tag matches `pname-<version>` Nix
+#     conventions and what glf-os/pkgs/proton-cachyos-bin pins).
+#
+# Setup:
+#   1. Settings -> CI/CD -> Pipeline schedules -> New schedule
+#      cron: "0 6 * * *"  (daily 6:00 UTC)
+#   2. Settings -> CI/CD -> Variables -> Add variable
+#      Key: PUSH_TOKEN  Value: <deploy token with write_repository scope>
+#      (CI_JOB_TOKEN lacks push rights on Framagit shared runners)
+
+default:
+  image: alpine:3.20
+
+stages:
+  - check
+  - tag
+
+variables:
+  GITHUB_REPO: "CachyOS/proton-cachyos"
+  GIT_STRATEGY: clone
+
+# ----------------------------------------------------------------------
+# JOB 1 — detect upstream release, bump default.nix, open MR
+# ----------------------------------------------------------------------
+check-upstream:
+  stage: check
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api"
+  before_script:
+    - apk add --no-cache curl jq git coreutils xxd bash
+    - git config user.name "GLF-OS bump bot"
+    - git config user.email "bump-bot@gaming-linux-fr.org"
+  script:
+    - |
+      set -eu
+
+      # Local version (e.g. "11.0-20260519-slr")
+      LOCAL=$(grep -oE 'version = "[^"]+"' default.nix | head -1 | cut -d'"' -f2)
+      echo "Local version    : $LOCAL"
+
+      # Upstream tag (e.g. "cachyos-11.0-20260519-slr") -> strip prefix
+      UPSTREAM_TAG=$(curl -fsS "https://api.github.com/repos/${GITHUB_REPO}/releases/latest" | jq -r .tag_name)
+      UPSTREAM=${UPSTREAM_TAG#cachyos-}
+      # Short tag = upstream version WITHOUT the "-slr" suffix
+      # (e.g. "11.0-20260519-slr" -> "11.0-20260519"). Used for the
+      # bump branch name AND the git tag we push at the end so the
+      # tag identity is stable across SLR / non-SLR variants.
+      SHORT_TAG=${UPSTREAM%-slr}
+      echo "Upstream tag     : $UPSTREAM_TAG"
+      echo "Upstream version : $UPSTREAM"
+      echo "Short tag        : $SHORT_TAG"
+
+      if [ "$LOCAL" = "$UPSTREAM" ]; then
+        echo "Already up to date."
+        exit 0
+      fi
+
+      BRANCH="bump/${SHORT_TAG}"
+
+      # If a bump branch for this version already exists on the remote,
+      # an earlier scheduled run already opened the MR -> skip.
+      if git ls-remote --heads origin "$BRANCH" | grep -q "$BRANCH"; then
+        echo "Branch $BRANCH already exists on origin, MR already opened."
+        exit 0
+      fi
+
+      # Download tarball, compute SRI sha256
+      URL="https://github.com/${GITHUB_REPO}/releases/download/${UPSTREAM_TAG}/proton-cachyos-${UPSTREAM}-x86_64.tar.xz"
+      echo "Downloading $URL"
+      HEX=$(curl -L -fsS "$URL" | sha256sum | awk '{print $1}')
+      SRI="sha256-$(printf %s "$HEX" | xxd -r -p | base64)"
+      echo "New hash         : $SRI"
+
+      git checkout -b "$BRANCH"
+      sed -i -E \
+        -e "s|version = \"[^\"]*\";|version = \"${UPSTREAM}\";|" \
+        -e "s|hash = \"sha256-[^\"]*\";|hash = \"${SRI}\";|" \
+        default.nix
+      echo "--- diff ---"
+      git --no-pager diff default.nix
+      echo "------------"
+      git add default.nix
+      git commit -m "bump(proton-cachyos-bin): ${LOCAL} -> ${UPSTREAM}" \
+                 -m "Upstream release: https://github.com/${GITHUB_REPO}/releases/tag/${UPSTREAM_TAG}" \
+                 -m "Hash verified via download + sha256sum + base64 SRI."
+
+      # Push with MR creation push options
+      git remote set-url --push origin "https://deploy-token:${PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+      git push -o merge_request.create \
+               -o merge_request.target=main \
+               -o merge_request.remove_source_branch \
+               -o merge_request.title="bump(proton-cachyos-bin): ${LOCAL} -> ${UPSTREAM}" \
+               -o merge_request.label="bump,auto" \
+               -o merge_request.assign="NoBoDyZ" \
+               -o merge_request.reviewer="NoBoDyZ" \
+               origin "$BRANCH"
+
+# ----------------------------------------------------------------------
+# JOB 2 — create tag = version on every push to main that changes default.nix
+# ----------------------------------------------------------------------
+auto-tag:
+  stage: tag
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - default.nix
+  before_script:
+    - apk add --no-cache git bash
+    - git config user.name "GLF-OS bump bot"
+    - git config user.email "bump-bot@gaming-linux-fr.org"
+  script:
+    - |
+      set -eu
+
+      VERSION=$(grep -oE 'version = "[^"]+"' default.nix | head -1 | cut -d'"' -f2)
+      # Tag the repo with the short form (no "-slr" suffix). E.g.
+      # version="11.0-20260519-slr" -> tag "11.0-20260519".
+      TAG=${VERSION%-slr}
+      echo "Version in default.nix: $VERSION"
+      echo "Tag to push          : $TAG"
+
+      # Skip if tag already exists (re-merge of same default.nix, etc.)
+      git fetch --tags origin 2>/dev/null || true
+      if git rev-parse --verify "refs/tags/${TAG}" >/dev/null 2>&1 || git ls-remote --tags origin "refs/tags/${TAG}" | grep -q .; then
+        echo "Tag ${TAG} already exists on origin, skipping."
+        exit 0
+      fi
+
+      git remote set-url --push origin "https://deploy-token:${PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+      git tag -a "$TAG" -m "proton-cachyos-bin ${VERSION}"
+      git push origin "$TAG"
+      echo "Tagged ${TAG} (default.nix version = ${VERSION})."
