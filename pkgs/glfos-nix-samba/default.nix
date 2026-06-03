@@ -4,7 +4,6 @@
   wrapGAppsHook4,
   meson,
   ninja,
-  glib,
   desktop-file-utils,
   gettext,
   gobject-introspection,
@@ -29,7 +28,6 @@ python3Packages.buildPythonApplication rec {
   nativeBuildInputs = [
     desktop-file-utils
     gettext
-    glib
     gobject-introspection
     meson
     ninja
@@ -45,15 +43,6 @@ python3Packages.buildPythonApplication rec {
   propagatedBuildInputs = with python3Packages; [
     pygobject3
   ];
-
-  # The application uses symbolic icons from Adwaita. This is applied by the
-  # Python wrapper before wrapGAppsHook4 adds the remaining GTK environment.
-  #makeWrapperArgs = [
-  #  "--prefix"
-  #  "XDG_DATA_DIRS"
-  #  ":"
-  #  "${adwaita-icon-theme}/share"
-  #];
 
   meta = with lib; {
     description = "GTK application to configure Samba shares on GLF-OS";
