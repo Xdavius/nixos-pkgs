@@ -14,7 +14,7 @@
 
 python3Packages.buildPythonApplication rec {
   pname = "glfos-welcome-screen";
-  version = "2.0.6";
+  version = "2.0.7";
 
   src = fetchgit {
     url = "https://github.com/imikado/glfos-welcome-screen";
