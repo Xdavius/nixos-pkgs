@@ -1,0 +1,67 @@
+# GLF-OS CI for nix-firewall-mngt
+#
+# Setup for auto-tag:
+#   Settings -> CI/CD -> Variables -> Add variable
+#   Key: PUSH_TOKEN  Value: <deploy token with write_repository scope>
+#   CI_JOB_TOKEN lacks push rights on Framagit shared runners.
+#
+stages:
+  - check
+  - tag
+
+variables:
+  GIT_STRATEGY: clone
+
+# Build the Nix package from the application repository.
+check-nix-build:
+  stage: check
+  image: nixos/nix:2.24.11
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "merge_request_event"
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+    - if: $CI_PIPELINE_SOURCE == "web" || $CI_PIPELINE_SOURCE == "api"
+  before_script:
+    - nix-channel --add https://nixos.org/channels/nixpkgs-unstable nixpkgs
+    - nix-channel --update
+  script:
+    - nix-build default.nix
+
+# Create a release tag matching Cargo.toml when the version changes on main.
+auto-tag:
+  stage: tag
+  image: alpine:3.20
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+      changes:
+        - Cargo.toml
+  before_script:
+    - apk add --no-cache bash git grep sed
+    - git config user.name "GLF-OS release bot"
+    - git config user.email "release-bot@gaming-linux-fr.org"
+  script:
+    - |
+      set -eu
+
+      VERSION=$(sed -n 's/^version = "\([^"]*\)"/\1/p' Cargo.toml | head -1)
+      TAG="v${VERSION}"
+
+      echo "Version in Cargo.toml: ${VERSION}"
+      echo "Tag to push          : ${TAG}"
+
+      if [ -z "${PUSH_TOKEN:-}" ]; then
+        echo "PUSH_TOKEN is not set."
+        echo "Ask a project maintainer to create a deploy token with write_repository scope"
+        echo "and add it in Settings -> CI/CD -> Variables as PUSH_TOKEN."
+        exit 1
+      fi
+
+      git fetch --tags origin 2>/dev/null || true
+      if git rev-parse --verify "refs/tags/${TAG}" >/dev/null 2>&1 || git ls-remote --tags origin "refs/tags/${TAG}" | grep -q .; then
+        echo "Tag ${TAG} already exists on origin, skipping."
+        exit 0
+      fi
+
+      git remote set-url --push origin "https://deploy-token:${PUSH_TOKEN}@${CI_SERVER_HOST}/${CI_PROJECT_PATH}.git"
+      git tag -a "${TAG}" -m "nix-firewall-mngt ${VERSION}"
+      git push origin "${TAG}"
+      echo "Tagged ${TAG}."
